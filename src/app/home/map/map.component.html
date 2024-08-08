@@ -1,0 +1,12 @@
+<div
+  leaflet
+  [leafletOptions]="options"
+  [style]="styleMap()"
+  (leafletMapReady)="onMapReady($event)"
+></div>
+<leaflet-layers-tree
+  [options]="treeOptions"
+  [baseTree]="baseTree"
+  [overlayTree]="overlayTree!"
+  [map]="map"
+/>
