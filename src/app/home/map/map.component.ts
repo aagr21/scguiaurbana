@@ -230,8 +230,8 @@ export class MapComponent implements OnInit {
                 pointToLayer(_: Feature<Point, any>, latlng: LatLng) {
                   return marker(latlng, {
                     icon: icon({
-                      iconSize: [37.5, 37.5],
-                      iconUrl: '/assets/images/semaforo.svg',
+                      iconSize: [29, 29],
+                      iconUrl: '/assets/images/traffic-light.svg',
                     }),
                   });
                 },
