@@ -4,7 +4,7 @@ import {
   latLng,
   MapOptions,
   tileLayer,
-  Map as LMap,
+  Map,
   Control,
   geoJSON,
   LatLng,
@@ -16,7 +16,7 @@ import { Feature, Point } from 'geojson';
 import { LeafletLayersTreeComponent } from './controls/leaflet-layers/leaflet-layers-tree.component';
 import { MapService } from '@services/map.service';
 import { CommonModule } from '@angular/common';
-import { AllData, SpeedReducer } from '@models/interfaces';
+import { AllData } from '@models/interfaces';
 
 @Component({
   selector: 'app-map',
@@ -41,7 +41,7 @@ export class MapComponent implements OnInit {
     zoomAnimation: true,
   };
 
-  map!: LMap;
+  map!: Map;
   treeOptions: Control.Layers.TreeOptions = {
     namedToggle: true,
     selectorBack: false,
@@ -247,7 +247,7 @@ export class MapComponent implements OnInit {
     return 'height: 100%; width: 100%';
   }
 
-  onMapReady(map: LMap) {
+  onMapReady(map: Map) {
     this.map = map;
     this.map.addLayer(this.googleMapsLayer);
   }
