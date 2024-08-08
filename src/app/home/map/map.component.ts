@@ -197,8 +197,8 @@ export class MapComponent implements OnInit {
                 pointToLayer(_: Feature<Point, any>, latlng: LatLng) {
                   return marker(latlng, {
                     icon: icon({
-                      iconSize: [25, 25],
-                      iconUrl: '/assets/images/bump.png',
+                      iconSize: [23, 23],
+                      iconUrl: '/assets/images/bump.svg',
                     }),
                   });
                 },
