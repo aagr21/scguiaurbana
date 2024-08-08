@@ -93,7 +93,6 @@ export class MapComponent implements OnInit {
   };
 
   ngOnInit(): void {
-
     this.overlayTree.children = [
       {
         label: 'Paradas de Micros',
@@ -177,6 +176,7 @@ export class MapComponent implements OnInit {
       },
       {
         label: 'Reductores',
+        selectAllCheckbox: true,
         children: this.allData.speedReducersGroups.map((element) => {
           return {
             label: element.year,
@@ -206,7 +206,39 @@ export class MapComponent implements OnInit {
             ),
           };
         }),
+      },
+      {
+        label: 'Semáforos',
         selectAllCheckbox: true,
+        children: this.allData.trafficLightsGroups.map((element) => {
+          return {
+            label: element.type,
+            layer: geoJSON(
+              {
+                type: 'FeatureCollection',
+                features: element.trafficLights.map((element) => {
+                  return {
+                    type: 'Feature',
+                    geometry: {
+                      type: 'Point',
+                      coordinates: element.geom.coordinates,
+                    },
+                  };
+                }),
+              } as any,
+              {
+                pointToLayer(_: Feature<Point, any>, latlng: LatLng) {
+                  return marker(latlng, {
+                    icon: icon({
+                      iconSize: [37.5, 37.5],
+                      iconUrl: '/assets/images/semaforo.svg',
+                    }),
+                  });
+                },
+              }
+            ),
+          };
+        }),
       },
     ];
   }

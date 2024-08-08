@@ -3,8 +3,10 @@ import {
   ChannelRoute,
   CityCamera,
   LineName,
-  LineRoute, SpeedReducer,
+  LineRoute,
+  SpeedReducer,
   SpeedReducerGroup,
+  TrafficLightGroup,
 } from '@models/interfaces';
 
 export interface AllData {
@@ -14,4 +16,5 @@ export interface AllData {
   linesRoutes: LineRoute[];
   channelsRoutes: ChannelRoute[];
   speedReducersGroups: SpeedReducerGroup[];
+  trafficLightsGroups: TrafficLightGroup[];
 }
