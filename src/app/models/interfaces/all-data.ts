@@ -4,6 +4,7 @@ import {
   CityCamera,
   LineName,
   LineRoute, SpeedReducer,
+  SpeedReducerGroup,
 } from '@models/interfaces';
 
 export interface AllData {
@@ -12,5 +13,5 @@ export interface AllData {
   linesNames: LineName[];
   linesRoutes: LineRoute[];
   channelsRoutes: ChannelRoute[];
-  speedReducers: SpeedReducer[];
+  speedReducersGroups: SpeedReducerGroup[];
 }

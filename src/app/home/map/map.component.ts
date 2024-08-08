@@ -93,22 +93,6 @@ export class MapComponent implements OnInit {
   };
 
   ngOnInit(): void {
-    let typesOfSpeedReducersMap = new Map<string, SpeedReducer[]>();
-
-    for (let i = 0; i < this.allData.speedReducers.length; i++) {
-      const typeOfSpeedReducer = this.allData.speedReducers[i];
-      if (typesOfSpeedReducersMap.get(typeOfSpeedReducer.year)) {
-        typesOfSpeedReducersMap
-          .get(typeOfSpeedReducer.year)!
-          .push(typeOfSpeedReducer);
-      } else {
-        typesOfSpeedReducersMap.set(typeOfSpeedReducer.year, [
-          typeOfSpeedReducer,
-        ]);
-      }
-    }
-
-    const typesOfSpeedReducersArray = [...typesOfSpeedReducersMap.values()];
 
     this.overlayTree.children = [
       {
@@ -193,13 +177,13 @@ export class MapComponent implements OnInit {
       },
       {
         label: 'Reductores',
-        children: typesOfSpeedReducersArray.map((element) => {
+        children: this.allData.speedReducersGroups.map((element) => {
           return {
-            label: element[element.length - 1].year,
+            label: element.year,
             layer: geoJSON(
               {
                 type: 'FeatureCollection',
-                features: element.map((element) => {
+                features: element.speedReducers.map((element) => {
                   return {
                     type: 'Feature',
                     geometry: {

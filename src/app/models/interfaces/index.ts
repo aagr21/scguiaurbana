@@ -5,4 +5,5 @@ export { Parking } from './parking';
 export { LineName } from './line-name';
 export { LineRoute } from './line-route';
 export { SpeedReducer } from './speed-reducer';
+export { SpeedReducerGroup } from './speed-reducer-group';
 export { AllData } from './all-data';
