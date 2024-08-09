@@ -113,7 +113,7 @@ export class MapComponent implements OnInit {
             pointToLayer(_: Feature<Point, any>, latlng: LatLng) {
               return marker(latlng, {
                 icon: icon({
-                  iconSize: [30, 30],
+                  iconSize: [27, 27],
                   iconUrl: '/assets/images/bus-stop.svg',
                 }),
               });
