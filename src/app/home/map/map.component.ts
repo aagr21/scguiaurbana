@@ -82,13 +82,13 @@ export class MapComponent implements OnInit {
     children: [],
   };
 
-  educationCentersGroupsObj: {[p: string]: string} = {
-    'MÓDULOS EDUCATIVOS':  'MÓDULO EDUCATIVO',
+  educationCentersGroupsObj: { [p: string]: string } = {
+    'MÓDULOS EDUCATIVOS': 'MÓDULO EDUCATIVO',
     'COLEGIOS PRIVADOS': 'COLEGIO PRIVADO',
     'EDUCACIÓN ESPECIAL': 'EDUCACIÓN ESPECIAL',
-    'UNIVERSIDADES': 'UNIVERSIDAD',
-    'INSTITUOS': 'INSTITUTO',
-    'EDUCACIÓN COMPLEMENTARIA': 'EDUCACIÓN COMPLEMENTARIA'
+    UNIVERSIDADES: 'UNIVERSIDAD',
+    INSTITUOS: 'INSTITUTO',
+    'EDUCACIÓN COMPLEMENTARIA': 'EDUCACIÓN COMPLEMENTARIA',
   };
 
   ngOnInit(): void {
@@ -278,7 +278,9 @@ export class MapComponent implements OnInit {
                       coordinates: element.geom.coordinates,
                     },
                     properties: {
-                      name: `${this.educationCentersGroupsObj[group.type]}: ${element.name}`,
+                      name: `${this.educationCentersGroupsObj[group.type]}: ${
+                        element.name
+                      }`,
                     },
                   };
                 }),
@@ -287,7 +289,7 @@ export class MapComponent implements OnInit {
                 pointToLayer(_: Feature<Point, any>, latlng: LatLng) {
                   return marker(latlng, {
                     icon: icon({
-                      iconSize: [23, 23],
+                      iconSize: [24, 24],
                       iconUrl: '/assets/images/education.svg',
                     }),
                   });
