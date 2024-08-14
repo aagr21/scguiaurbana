@@ -4,9 +4,5 @@
   [style]="styleMap()"
   (leafletMapReady)="onMapReady($event)"
 ></div>
-<leaflet-layers-tree
-  [options]="treeOptions"
-  [baseTree]="baseTree"
-  [overlayTree]="overlayTree!"
-  [map]="map"
-/>
+
+<leaflet-layers-tree [baseTree]="baseTree" [overlayTree]="overlayTree" [options]="treeOptions" [map]="map"></leaflet-layers-tree>

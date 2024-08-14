@@ -1,4 +1,4 @@
-import { Component, inject, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { LeafletModule } from '@bluehalo/ngx-leaflet';
 import {
   latLng,
@@ -8,13 +8,11 @@ import {
   Control,
   geoJSON,
   LatLng,
-  Layer,
   marker,
   icon,
 } from 'leaflet';
 import { Feature, Point } from 'geojson';
-import { LeafletLayersTreeComponent } from './controls/leaflet-layers/leaflet-layers-tree.component';
-import { MapService } from '@services/map.service';
+import { LeafletLayersTreeComponent } from './controls/leaflet-layers-tree/leaflet-layers-tree.component';
 import { CommonModule } from '@angular/common';
 import { AllData } from '@models/interfaces';
 
@@ -27,13 +25,6 @@ import { AllData } from '@models/interfaces';
 })
 export class MapComponent implements OnInit {
   options: MapOptions = {
-    layers: [
-      tileLayer('https://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
-        attribution: 'Google Maps',
-        subdomains: ['mt0', 'mt1', 'mt2', 'mt3'],
-        maxNativeZoom: 20,
-      }),
-    ],
     zoom: 13,
     center: latLng(-17.779223, -63.18164),
     attributionControl: false,
@@ -84,12 +75,20 @@ export class MapComponent implements OnInit {
       },
     ],
   };
-  mapService = inject(MapService);
   @Input() allData!: AllData;
 
   overlayTree: Control.Layers.TreeObject = {
     label: 'Puntos de Interés',
     children: [],
+  };
+
+  educationCentersGroupsObj: {[p: string]: string} = {
+    'MÓDULOS EDUCATIVOS':  'MÓDULO EDUCATIVO',
+    'COLEGIOS PRIVADOS': 'COLEGIO PRIVADO',
+    'EDUCACIÓN ESPECIAL': 'EDUCACIÓN ESPECIAL',
+    'UNIVERSIDADES': 'UNIVERSIDAD',
+    'INSTITUOS': 'INSTITUTO',
+    'EDUCACIÓN COMPLEMENTARIA': 'EDUCACIÓN COMPLEMENTARIA'
   };
 
   ngOnInit(): void {
@@ -106,6 +105,7 @@ export class MapComponent implements OnInit {
                   type: 'Point',
                   coordinates: element.geom.coordinates,
                 },
+                properties: {},
               };
             }),
           } as any,
@@ -117,6 +117,9 @@ export class MapComponent implements OnInit {
                   iconUrl: '/assets/images/bus-stop.svg',
                 }),
               });
+            },
+            onEachFeature(feature, layer) {
+              layer.bindPopup(feature.properties.location);
             },
           }
         ),
@@ -133,6 +136,9 @@ export class MapComponent implements OnInit {
                   type: 'Point',
                   coordinates: element.geom.coordinates,
                 },
+                properties: {
+                  location: element.location,
+                },
               };
             }),
           } as any,
@@ -140,10 +146,13 @@ export class MapComponent implements OnInit {
             pointToLayer(_: Feature<Point, any>, latlng: LatLng) {
               return marker(latlng, {
                 icon: icon({
-                  iconSize: [55, 55],
+                  iconSize: [52, 52],
                   iconUrl: '/assets/images/camera.svg',
                 }),
               });
+            },
+            onEachFeature(feature, layer) {
+              layer.bindPopup(feature.properties.location);
             },
           }
         ),
@@ -190,6 +199,9 @@ export class MapComponent implements OnInit {
                       type: 'Point',
                       coordinates: element.geom.coordinates,
                     },
+                    properties: {
+                      location: element.location,
+                    },
                   };
                 }),
               } as any,
@@ -201,6 +213,9 @@ export class MapComponent implements OnInit {
                       iconUrl: '/assets/images/bump.svg',
                     }),
                   });
+                },
+                onEachFeature(feature, layer) {
+                  layer.bindPopup(feature.properties.location);
                 },
               }
             ),
@@ -223,6 +238,9 @@ export class MapComponent implements OnInit {
                       type: 'Point',
                       coordinates: element.geom.coordinates,
                     },
+                    properties: {
+                      location: element.location,
+                    },
                   };
                 }),
               } as any,
@@ -234,6 +252,48 @@ export class MapComponent implements OnInit {
                       iconUrl: '/assets/images/traffic-light.svg',
                     }),
                   });
+                },
+                onEachFeature(feature, layer) {
+                  layer.bindPopup(feature.properties.location);
+                },
+              }
+            ),
+          };
+        }),
+      },
+      {
+        label: 'Educación',
+        selectAllCheckbox: true,
+        children: this.allData.educationCentersGroups.map((group) => {
+          return {
+            label: group.type,
+            layer: geoJSON(
+              {
+                type: 'FeatureCollection',
+                features: group.educationCenters.map((element) => {
+                  return {
+                    type: 'Feature',
+                    geometry: {
+                      type: 'Point',
+                      coordinates: element.geom.coordinates,
+                    },
+                    properties: {
+                      name: `${this.educationCentersGroupsObj[group.type]}: ${element.name}`,
+                    },
+                  };
+                }),
+              } as any,
+              {
+                pointToLayer(_: Feature<Point, any>, latlng: LatLng) {
+                  return marker(latlng, {
+                    icon: icon({
+                      iconSize: [23, 23],
+                      iconUrl: '/assets/images/education.svg',
+                    }),
+                  });
+                },
+                onEachFeature(feature, layer) {
+                  layer.bindPopup(feature.properties.name);
                 },
               }
             ),

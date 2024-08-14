@@ -1,5 +1,5 @@
 /// <reference path="../../../../../../node_modules/leaflet.control.layers.tree/L.Control.Layers.Tree.d.ts"
-import { Component, Input, OnChanges, OnDestroy, SimpleChanges } from '@angular/core';
+import { Component, Input, OnDestroy } from '@angular/core';
 import { Map, control, Control } from 'leaflet';
 import '../../../../../../node_modules/leaflet.control.layers.tree/L.Control.Layers.Tree.js';
 
@@ -14,7 +14,7 @@ interface customMap extends Map {
   templateUrl: './leaflet-layers-tree.component.html',
   styleUrl: './leaflet-layers-tree.component.scss',
 })
-export class LeafletLayersTreeComponent implements OnDestroy, OnChanges {
+export class LeafletLayersTreeComponent implements OnDestroy {
   private _map?: Map;
   public control: Control.Layers.Tree = new Control.Layers.Tree();
 
@@ -28,9 +28,6 @@ export class LeafletLayersTreeComponent implements OnDestroy, OnChanges {
       this._map?.off('unload', (this.map as customMap)?._unload, this.control);
     }
     if (this._map && this.control) this._map.removeControl(this.control);
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
   }
 
   @Input() options: Control.Layers.TreeOptions = {};

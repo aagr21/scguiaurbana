@@ -1,4 +1,5 @@
 {
+  "type": "module",
   "name": "leaflet-custom-controls",
   "version": "0.0.0",
   "scripts": {
@@ -22,6 +23,7 @@
     "@angular/router": "^18.1.0",
     "@bluehalo/ngx-leaflet": "^18.0.2",
     "leaflet": "^1.9.4",
+    "leaflet-custom-controls": "file:",
     "leaflet.control.layers.tree": "^1.1.0",
     "ngx-socket-io": "^4.7.0",
     "ngx-spinner": "^17.0.0",

@@ -9,3 +9,5 @@ export { SpeedReducerGroup } from './speed-reducer-group';
 export { AllData } from './all-data';
 export { TrafficLight } from './traffic-light';
 export { TrafficLightGroup } from './traffic-light-group';
+export { EducationCenter } from './education-center';
+export { EducationCenterGroup } from './education-center-group';

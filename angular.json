@@ -17,6 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
+            "allowedCommonJsDependencies": ["*"],
             "outputPath": "dist/leaflet-custom-controls",
             "index": "src/index.html",
             "browser": "src/main.ts",
@@ -34,6 +35,7 @@
               "src/styles.scss",
               "./node_modules/leaflet/dist/leaflet.css",
               "./node_modules/leaflet.control.layers.tree/L.Control.Layers.Tree.css",
+              "src/app/home/map/controls/leaflet-layers-tree/leaflet-layers-tree.component.scss",
               "./node_modules/ngx-spinner/animations/ball-scale-multiple.css"
             ],
             "scripts": []

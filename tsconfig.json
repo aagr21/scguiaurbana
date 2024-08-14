@@ -18,23 +18,13 @@
     "importHelpers": true,
     "target": "ES2022",
     "module": "ES2022",
-    "lib": [
-      "ES2022",
-      "dom"
-    ],
+    "lib": ["ES2022", "dom"],
+    "allowSyntheticDefaultImports": true,
     "paths": {
-      "@home/*": [
-        "./src/app/home/*"
-      ],
-      "@services/*": [
-        "./src/app/services/*"
-      ],
-      "@models/*": [
-        "./src/app/models/*"
-      ],
-      "@environments/*": [
-        "./src/environments/*"
-      ]
+      "@home/*": ["./src/app/home/*"],
+      "@services/*": ["./src/app/services/*"],
+      "@models/*": ["./src/app/models/*"],
+      "@environments/*": ["./src/environments/*"]
     }
   },
   "angularCompilerOptions": {
